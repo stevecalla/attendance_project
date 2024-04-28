@@ -1,4 +1,4 @@
-const db_name = `schoolday_attendance_db`;
+const db_name = `mock_attendance_db`;
 
 const query_create_schools_table = `
     CREATE TABLE IF NOT EXISTS schools (

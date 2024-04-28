@@ -1,10 +1,12 @@
 const mysql = require('mysql2');
+const dotenv = require('dotenv');
+dotenv.config({ path: "../.env" }); // add path to read.env file
 
-const { local_schoolDay_attendance_db_config } = require('./utilities/config');
-const { create_local_db_connection } = require('./utilities/connectionLocalDB');
+const { local_mock_attendance_db_config } = require('../utilities/config');
+const { create_local_db_connection } = require('../utilities/connectionLocalDB');
 
-const { query_create_database } = require('./queries/queries_create_db');
-const { query_drop_database } = require('./queries/queries_drop_db_tables');
+const { query_create_database } = require('../queries/queries_create_db');
+const { query_drop_database } = require('../queries/queries_drop_db_tables');
 const { 
     query_create_schools_table,
     query_create_classes_table,
@@ -12,17 +14,17 @@ const {
     query_create_students_table,
     query_create_attendance_table,
     tables_library
-} = require('./queries/queries_create_tables');
-const { query_insert_seed_data } = require('./queries/queries_insert_seed_data');
-const { seed_data } = require('./queries/queries_seed_data');
+} = require('../queries/queries_create_tables');
+const { query_insert_seed_data } = require('../queries/queries_insert_seed_data');
+const { seed_data } = require('../queries/queries_seed_data');
 
-const db_name = `schoolday_attendance_db`;
+const db_name = `mock_attendance_db`;
 
 // Connect to MySQL
 async function create_connection() {
     try {
         // Create a connection to MySQL
-        const config_details = local_schoolDay_attendance_db_config;
+        const config_details = local_mock_attendance_db_config;
         // console.log(config_details);
 
         const pool = create_local_db_connection(config_details);
@@ -89,7 +91,7 @@ async function main() {
         // STEP #0: CREATE CONNECTION
         const pool = await create_connection();
 
-        const db_name = `schoolday_attendance_db`;
+        const db_name = `mock_attendance_db`;
 
         // STEP #1: CREATE DATABASE
         await execute_mysql_working_query(pool, db_name, query_drop_database(db_name), `STEP #1.0: DROP DB`);
