@@ -33,7 +33,9 @@ const query_create_students_table = `
         student_id INT AUTO_INCREMENT PRIMARY KEY,
         first_name VARCHAR(255) NOT NULL,
         last_name VARCHAR(255) NOT NULL,
+        school_id INT,
         class_id INT,
+        FOREIGN KEY (school_id) REFERENCES schools(school_id),
         FOREIGN KEY (class_id) REFERENCES classes(class_id)
     );
 `;
@@ -41,14 +43,16 @@ const query_create_students_table = `
 const query_create_attendance_table = `
     CREATE TABLE IF NOT EXISTS attendance (
         attendance_id INT AUTO_INCREMENT PRIMARY KEY,
-        teacher_id INT,
+        school_id INT,
         class_id INT,
+        teacher_id INT,
         student_id INT,
         attendance_date DATE,
         is_present BOOLEAN,
         status ENUM('Present', 'Absent', 'Late', 'Excused'),
-        FOREIGN KEY (teacher_id) REFERENCES teachers(teacher_id),
+        FOREIGN KEY (school_id) REFERENCES schools(school_id),
         FOREIGN KEY (class_id) REFERENCES classes(class_id),
+        FOREIGN KEY (teacher_id) REFERENCES teachers(teacher_id),
         FOREIGN KEY (student_id) REFERENCES students(student_id)
     );
 `;
