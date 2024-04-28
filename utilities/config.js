@@ -1,4 +1,5 @@
 const dotenv = require('dotenv');
+<<<<<<< HEAD
 dotenv.config({path: "../.env"}); // adding the path ensures each folder will read the .env file as necessary
 
 // console.log(process.env); // double check if env variables are available
@@ -28,10 +29,20 @@ const forwardConfig = {
 };
 
 const localBookingDbConfig = {
+=======
+dotenv.config();
+// dotenv.config({path: "../.env"}); // add path to read .env file
+
+// console.log(process.env); // check avail of .env
+// console.log(process.env.LOCAL_ATTENDANCE_DB); // check avail of .env
+
+const local_schoolDay_attendance_db_config = {
+>>>>>>> fix/history_issue
     host: process.env.LOCAL_HOST,
     port: 3306,
     user: process.env.LOCAL_MYSQL_USER,
     password: process.env.LOCAL_MYSQL_PASSWORD,
+<<<<<<< HEAD
     database: process.env.LOCAL_EZHIRE_BOOKING_DB,
     connectionLimit: 20, // adjust as needed
 };
@@ -84,4 +95,15 @@ module.exports = {
     localPacingDbConfig,
     localUserDbConfig,
     csvExportPath,
+=======
+    // database: process.env.LOCAL_ATTENDANCE_DB,
+    connectionLimit: 20,
+};
+
+const csv_export_path = `C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/data/`;
+
+module.exports = {
+    local_schoolDay_attendance_db_config,
+    csv_export_path,
+>>>>>>> fix/history_issue
 };

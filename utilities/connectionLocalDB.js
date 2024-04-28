@@ -1,7 +1,11 @@
 const mysql = require('mysql2');
 
 // Function to create a Promise for managing the SSH connection and MySQL queries
+<<<<<<< HEAD
 function createLocalDBConnection(conf_details) {
+=======
+function create_local_db_connection(conf_details) {
+>>>>>>> fix/history_issue
     return new Promise((resolve, reject) => {
 
         // MySQL configuration
@@ -40,6 +44,10 @@ function createLocalDBConnection(conf_details) {
 }
 
 module.exports = {
+<<<<<<< HEAD
     createLocalDBConnection,
+=======
+    create_local_db_connection,
+>>>>>>> fix/history_issue
 }
 
