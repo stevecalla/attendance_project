@@ -5,7 +5,7 @@ dotenv.config();
 // console.log(process.env); // check avail of .env
 // console.log(process.env.LOCAL_ATTENDANCE_DB); // check avail of .env
 
-const local_schoolDay_attendance_db_config = {
+const local_mock_attendance_db_config = {
     host: process.env.LOCAL_HOST,
     port: 3306,
     user: process.env.LOCAL_MYSQL_USER,
@@ -17,6 +17,6 @@ const local_schoolDay_attendance_db_config = {
 const csv_export_path = `C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/data/`;
 
 module.exports = {
-    local_schoolDay_attendance_db_config,
+    local_mock_attendance_db_config,
     csv_export_path,
 };
