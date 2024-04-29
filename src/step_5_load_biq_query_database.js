@@ -7,9 +7,10 @@ const fs = require('fs').promises;
 const { BigQuery } = require('@google-cloud/bigquery');
 const { Storage } = require('@google-cloud/storage');
 
-let GOOGLE_SERVICE_ACCOUNT = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT);
-const { csv_export_path } = require('../utilities/config');
+const { execute_google_cloud_command } = require('../utilities/google_cloud_execute_command');
 
+const GOOGLE_SERVICE_ACCOUNT = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT);
+const { csv_export_path } = require('../utilities/config');
 // const { booking_schema } = require('./schema_booking_data');
 
 const datasetId = "attendance_db";
@@ -20,9 +21,13 @@ const tableIds = ["attendance_data",  "classes_data", "schools_data", "students_
 async function execute_load_big_query_database() {
     const startTime = performance.now();
     let elapsedTime;
+        
+    // GOOGLE CLOUD = LOGIN AND SET PROPERTY ID
+    await execute_google_cloud_command("login", "Login successful", "login_to_google_cloud");
+    await execute_google_cloud_command("set_property_id", "Project Id set successfully.", "set_project_id_for_google_cloud");
     
     // Instantiate clients
-    const bigqueryClient = new BigQuery({ credentials: GOOGLE_SERVICE_ACCOUNT, });
+    const bigqueryClient = new BigQuery({ credentials: GOOGLE_SERVICE_ACCOUNT });
     const storageClient = new Storage();
     
     /**

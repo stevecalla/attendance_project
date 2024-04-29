@@ -4,7 +4,6 @@
 // const students = `SELECT * FROM students;`;
 // const attendanace = `SELECT * FROM attendanace;`;
 
-
 const { local_mock_attendance_db_config } = require('../utilities/config');
 
 function select_query(table_name) {
