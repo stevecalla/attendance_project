@@ -3,22 +3,22 @@ const dotenv = require('dotenv');
 dotenv.config({ path: "../.env" }); // add path to read.env file
 
 const { BigQuery } = require('@google-cloud/bigquery'); // Import the Google Cloud client libraries
+const { execute_google_cloud_command } = require('../utilities/google_cloud_execute_command');
 
-let GOOGLE_SERVICE_ACCOUNT = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT);
-
+const GOOGLE_SERVICE_ACCOUNT = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT);
 const datasetId = "attendance_db";
 const tableIds = ["attendance_data",  "classes_data", "schools_data", "students_data",  "teachers_data"];
 
-// console.log(process.env);
-
 async function execute_create_bigquery_dataset() {
-    const startTime = performance.now();
-
     try {
+        const startTime = performance.now();
+        
+        // GOOGLE CLOUD = LOGIN AND SET PROPERTY ID
+        await execute_google_cloud_command("login", "Login successful", "login_to_google_cloud");
+        await execute_google_cloud_command("set_property_id", "Project Id set successfully.", "set_project_id_for_google_cloud");
+
         // Create a client with custom credentials
-        const bigqueryClient = new BigQuery({
-            credentials: GOOGLE_SERVICE_ACCOUNT,
-        });
+        const bigqueryClient = new BigQuery({ credentials: GOOGLE_SERVICE_ACCOUNT });
 
         // Create the dataset if it doesn't exist
         const [dataset] = await bigqueryClient.dataset(datasetId).get({ autoCreate: true });

@@ -1,6 +1,11 @@
+const dotenv = require('dotenv');
+dotenv.config({ path: "../.env" }); // add path to read.env file
+
 const fs = require('fs').promises;
 const { exec } = require('child_process');
+
 const { generateLogFile } = require('../utilities/generateLogFile');
+const { execute_google_cloud_command } = require('../utilities/google_cloud_execute_command');
 
 const { csv_export_path } = require('../utilities/config');
 
@@ -9,10 +14,15 @@ const destinationPath = `gs://${bucketName}/`;
 
 // ASYNC FUNCTION TO UPLOAD CSV FILES TO GOOGLE CLOUD STORAGE
 async function execute_upload_csv_to_cloud() {
-  const startTime = performance.now();
-  const directory = `${csv_export_path}attendance_data`; // DIRECTORY CONTAINING CSV FILES
-
   try {
+    const startTime = performance.now();
+  
+    const directory = `${csv_export_path}attendance_data`; // DIRECTORY CONTAINING CSV FILES
+
+    // GOOGLE CLOUD = LOGIN AND SET PROPERTY ID
+    await execute_google_cloud_command("login", "Login successful", "login_to_google_cloud");
+    await execute_google_cloud_command("set_property_id", "Project Id set successfully.", "set_project_id_for_google_cloud");
+
     const files = await fs.readdir(directory); // LIST ALL FILES IN THE DIRECTORY
     console.log(files);
     let numberOfFiles = 0;
