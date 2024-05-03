@@ -11,7 +11,7 @@ const { execute_google_cloud_command } = require('../utilities/google_cloud_exec
 
 const GOOGLE_SERVICE_ACCOUNT = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT);
 const { csv_export_path } = require('../utilities/config');
-// const { booking_schema } = require('./schema_booking_data');
+const { attendance_schema } = require('../utilities/attendance_schema');
 
 const datasetId = "attendance_db";
 //TODO: Based on testing the order is important; below is in alpha order
@@ -61,11 +61,10 @@ async function execute_load_big_query_database() {
         // Configure the load job. For full list of options, see:
         // https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad
         // source: https://cloud.google.com/bigquery/docs/samples/bigquery-load-table-gcs-csv-truncate
-        const metadata = file.tableName === "booking_data" ? {
+        const metadata = file.tableName === "attendance_data" ? {
             sourceFormat: 'CSV',
             skipLeadingRows: 1,
-            schema: { fields: booking_schema },
-            // autodetect: true,
+            schema: { fields: attendance_schema },
             location: 'US',
             // Set the write disposition to overwrite existing table data.
             writeDisposition: 'WRITE_TRUNCATE',
