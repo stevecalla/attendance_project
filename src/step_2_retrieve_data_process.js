@@ -11,12 +11,8 @@ const { generateLogFile } = require('../utilities/generateLogFile');
 
 const { 
     select_query,
+    select_attendance_data,
     tables_library,
-    // schools,
-    // classes,
-    // teachers,
-    // students,
-    // attendanace
 } = require('../queries/query_all_tables_for_biquery');
 
 async function create_directory(directoryPath) {
@@ -156,7 +152,8 @@ async function execute_retrieve_data() {
             const pool = await create_local_db_connection(pool_name);
             // console.log(pool);
 
-            const query = select_query(table_name);
+            const query = table_name === "attendance" ? select_attendance_data(table_name) : select_query(table_name);
+            // console.log(query);
             
             const info = `${step} GET ${step_info.toUpperCase()} DATA`;
 

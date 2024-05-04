@@ -2,12 +2,29 @@
 // const classes = `SELECT * FROM classes;`;
 // const teachers = `SELECT * FROM teachers;`;
 // const students = `SELECT * FROM students;`;
-// const attendanace = `SELECT * FROM attendanace;`;
 
 const { local_mock_attendance_db_config } = require('../utilities/config');
 
 function select_query(table_name) {
     return `SELECT * FROM ${table_name}`
+}
+
+function select_attendance_data(table_name) {
+  return `
+    SELECT 
+      attendance_id,
+      school_id,
+      class_id,
+      teacher_id,
+      student_id,
+
+      -- attendance_date,
+      DATE_FORMAT(attendance_date, '%Y-%m-%d') AS attendance_date,
+
+      is_present,
+      -- status
+      notes
+    FROM ${table_name}`
 }
 
 const pacingQuery = `
@@ -76,12 +93,8 @@ const tables_library = [
 
 module.exports = {
     select_query,
+    select_attendance_data,
     tables_library,
-    // schools,
-    // classes,
-    // teachers,
-    // students,
-    // attendanace
 }
 
 //NOTE: Need to fix date formats so biqquery would convert properly; BQ saves all timestamps in UTC thus need to convert for analysis/Looker queries 

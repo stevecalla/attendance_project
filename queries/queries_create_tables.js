@@ -23,6 +23,7 @@ const query_create_teachers_table = `
         teacher_id INT AUTO_INCREMENT PRIMARY KEY,
         first_name VARCHAR(255) NOT NULL,
         last_name VARCHAR(255) NOT NULL,
+        email_address VARCHAR(255),
         class_id INT,
         FOREIGN KEY (class_id) REFERENCES classes(class_id)
     );
@@ -49,7 +50,7 @@ const query_create_attendance_table = `
         student_id INT,
         attendance_date DATE,
         is_present BOOLEAN,
-        status ENUM('Present', 'Absent', 'Late', 'Excused'),
+        notes VARCHAR(255),
         FOREIGN KEY (school_id) REFERENCES schools(school_id),
         FOREIGN KEY (class_id) REFERENCES classes(class_id),
         FOREIGN KEY (teacher_id) REFERENCES teachers(teacher_id),
