@@ -11,11 +11,11 @@ const seed_data = [
   { table_name: "classes", class_name: 'Recreation 101', school_id: 1},
 
   // Teachers
-  { table_name: "teachers", first_name: 'Sam', last_name: 'Waters', class_id: 1},
-  { table_name: "teachers", first_name: 'Debbie', last_name: 'Johnson', class_id: 2},
-  { table_name: "teachers", first_name: 'Bessie', last_name: 'Doodle', class_id: 3},
-  { table_name: "teachers", first_name: 'Tom', last_name: 'Horsh', class_id: 4},
-  { table_name: "teachers", first_name: 'Robert', last_name: 'Griffin', class_id: 5},
+  { table_name: "teachers", first_name: 'Steve', last_name: 'Calla', email_address: 'callasteven@gmail.com', class_id: 1},
+  { table_name: "teachers", first_name: 'Patrick', last_name: 'Black', email_address: 'pat@safermgmt.com', class_id: 2},
+  { table_name: "teachers", first_name: 'Bessie', last_name: 'Doodle', email_address: '', class_id: 3},
+  { table_name: "teachers", first_name: 'Tom', last_name: 'Horsh', email_address: '', class_id: 4},
+  { table_name: "teachers", first_name: 'Robert', last_name: 'Griffin', email_address: '', class_id: 5},
 
   // Students
   {table_name: "students", first_name: "Annabela", last_name: "Jeays", school_id: "1", class_id: "1"},   

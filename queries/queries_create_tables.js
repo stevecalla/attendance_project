@@ -23,6 +23,7 @@ const query_create_teachers_table = `
         teacher_id INT AUTO_INCREMENT PRIMARY KEY,
         first_name VARCHAR(255) NOT NULL,
         last_name VARCHAR(255) NOT NULL,
+        email_address VARCHAR(255),
         class_id INT,
         FOREIGN KEY (class_id) REFERENCES classes(class_id)
     );
