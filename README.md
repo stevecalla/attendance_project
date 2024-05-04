@@ -77,6 +77,7 @@ In addition, this Github repo creates the backend datebase as noted below:
 
 * Key Metrics Screenshot
 <img src="./src/assets/key_metrics_computer_frame.png" width="700" height="400">
+<img src="./src/assets/mobile.gif" width="700" height="400">
 * Dashbaord Screenshot
 * Deep Dive Screenshot
 * My Class Screenshot
