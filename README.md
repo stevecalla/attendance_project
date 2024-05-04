@@ -60,7 +60,7 @@ In addition, this Github repo creates the backend datebase as noted below:
 7. Integrate this dashboard with app designed to provide more functionality beyond reporting.
 8. Conduct client research to align features and design with practical use and needs.
 9. Integrate appropriate alerts and notifications to confirm attendance status updates.
-10. If possible add testing in Retool and for this code base.
+10. Add/leverage Retool functionality for testing, modules, versioning, analytics tracking, login/out and more.
 
 ## Technology
 
