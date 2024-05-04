@@ -60,6 +60,7 @@ In addition, this Github repo creates the backend datebase as noted below:
 7. Integrate this dashboard with app designed to provide more functionality beyond reporting.
 8. Conduct client research to align features and design with practical use and needs.
 9. Integrate appropriate alerts and notifications to confirm attendance status updates.
+10. If possible add testing in Retool and for this code base.
 
 ## Technology
 
@@ -67,7 +68,7 @@ In addition, this Github repo creates the backend datebase as noted below:
 2. `Git/Github:` Repo and version management specifically for the backend database code.
 3. `MySQL`: Local database in MySQL Workbench.
 4. `Nodejs & Javascript`: For building/seeding the local MySQL DB and deploying to Google Cloud/Bigquery.
-10. NPM Packages: `moment` in Retool, 'dayjs`, `mysql2`, `dotenv`, `google-cloud/bigquery`, `google-cloud/storage`.
+10. `NPM Packages`: `moment` in Retool, `dayjs`, `mysql2`, `dotenv`, `google-cloud/bigquery`, `google-cloud/storage`.
 
 ## Website Preview
 
@@ -82,10 +83,6 @@ In addition, this Github repo creates the backend datebase as noted below:
 * Deep Dive Screenshot
 * My Class Screenshot
 
-## Tests
-
-No tests at this time.
-
 ## Installation
 
 Setup: 
@@ -95,8 +92,8 @@ Setup the Database Schema:
 - (1) Add a .env file. Include the fields below in the .env file. Place the .env at the root level.
 
   LOCAL MYSQL CONNECTION
-  * MYSQL_HOST=127.0.0.1
-  * MYSQL_PORT=3306
+  * MYSQL_HOST=<localhost>
+  * MYSQL_PORT=<port>
 
   LOCAL_HOST=localhost
   * LOCAL_HOST=<address>
@@ -119,6 +116,10 @@ Process to Create DB and Upload to Google Cloud/BigQuery:
 - Run step #3 in the SRC file `node step_3_upload_csv_to_cloud.js ` 
 - Run step #4 in the SRC file `node step_4_create_bigquery_dataset.js`
 - Run step #5 in the SRC file `node step_5_load_biq_query_database.js`
+
+## Tests
+
+No tests at this time.
 
 ## Contributing
 
