@@ -39,12 +39,11 @@ This app is deployed using Retool. From a development perspective, this app uses
 6. Responsiveness: Ensure the app is responsive to various screen sizes and devices.
 7. Design: Ensure the layout is functionally intutive and visually appealing.
 
-The following pages exist:
+There are total of 6 pages. Three (3) pages are "teacher" specific with logic to identify the loggin teacher then pre-filter the data for that teach only. These pages are prefixed with "My" under the "My Classes" menu. Three (3) pages provide data for all students.
 
-1. Key Metrics: Provides a basic over of key metrics such as percent of students present in mobile and desktop. In desktop also provides a chart displaying percent present and the absolute number of students present or absent by date.
-2. Dashboard: Provides a tabbed component to summarize attendance stats by date, teacher, student as well as a table component to view the detailed records of student attendance with the ability to update the "Present" checkbox. This table also has a search box that uses fuzzy match logic to search the entire table as well as a filter option in the lower right hand cornder. In addition the tables are sortable using a toggle for each column. Above the table is a dynamic field that updates to show the "selected" row data which allows the user to be sure they are clicking / reviewing the correct row and in mobile format allows the user to rollover each row to see the selected row information rather than needing to scroll to the right.
-3. Deep Dive: Provides a more detailed data table with all the functionality described in bullet 2 above as well as the ability to update attendance and add a note to each attendance record.
-4. My Class: Provides a format specifically designed to efficiently update attendance records and includes a default feature that filters for the login teachers classes.
+1. My Dashboard / All Dashboard: Provides a basic over of key metrics such as percent of student absent/present as well as counts for each. In desktop, a chart displays percent present and the absolute number of students present or absent by date.
+2. My Attendance / All Attendance: Provides a tabbed component to summarize attendance stats by date, teacher, student as well as a table component to view the detailed records of student attendance with the ability to update the "Present" checkbox. This table also has a search box that uses fuzzy match logic to search the entire table as well as a filter option in the lower right hand cornder. In addition the tables are sortable using a toggle for each column. Above the table is a dynamic field that updates to show the "selected" row data which allows the user to be sure they are clicking / reviewing the correct row and in mobile format allows the user to rollover each row to see the selected row information rather than needing to scroll to the right.
+3. My Data / All Data: Provides a more detailed data table with all the functionality described in bullet 2 above as well as the ability to update attendance and add a note to each attendance record.
 
 In addition, this Github repo creates the backend datebase as noted below:
 1. MySQL/Seed Data/Google Cloud: The code in this Github repo is specifically designed to use Nodejs and Javascrit to (a) create the DB structure with related tables and seed data and automatically upload this information from a local MySQL DB to Google Services and Google Bigquery (in a five step process that is outlined in the SRC file).
@@ -60,11 +59,11 @@ In addition, this Github repo creates the backend datebase as noted below:
 7. Integrate this dashboard with app designed to provide more functionality beyond reporting.
 8. Conduct client research to align features and design with practical use and needs.
 9. Integrate appropriate alerts and notifications to confirm attendance status updates.
-10. If possible add testing in Retool and for this code base.
+10. Add/leverage Retool functionality for testing, modules, versioning, analytics tracking, login/out and more.
 
 ## Technology
 
-1. `Retool:` Front-end app.
+1. `Retool:` Front-end app. [Tutorial](https://docs.retool.com/apps/web/tutorial/3)
 2. `Git/Github:` Repo and version management specifically for the backend database code.
 3. `MySQL`: Local database in MySQL Workbench.
 4. `Nodejs & Javascript`: For building/seeding the local MySQL DB and deploying to Google Cloud/Bigquery.
