@@ -58,6 +58,25 @@ const query_create_attendance_table = `
     );
 `;
 
+const query_create_attendance_log_change_table = `
+    CREATE TABLE IF NOT EXISTS attendance_change_log (
+        attendance_id INT AUTO_INCREMENT PRIMARY KEY,
+        school_id INT,
+        class_id INT,
+        teacher_id INT,
+        student_id INT,
+        attendance_date DATE,
+        is_present BOOLEAN,
+        notes VARCHAR(255),
+        modified_by_email VARCHAR(255),
+        modified_by_full_name VARCHAR(255),
+        FOREIGN KEY (school_id) REFERENCES schools(school_id),
+        FOREIGN KEY (class_id) REFERENCES classes(class_id),
+        FOREIGN KEY (teacher_id) REFERENCES teachers(teacher_id),
+        FOREIGN KEY (student_id) REFERENCES students(student_id)
+    );
+`;
+
 const tables_library = [
     { table_name: "schools",
       create_query: query_create_schools_table,
@@ -84,6 +103,11 @@ const tables_library = [
       step: "STEP #2.5:",
       step_info: "attendance",
     },
+    { table_name: "attendance_change_log",
+      create_query: query_create_attendance_log_change_table,
+      step: "STEP #2.5:",
+      step_info: "attendance change log",
+    },
 ]
 
 module.exports = {
@@ -92,5 +116,6 @@ module.exports = {
     query_create_teachers_table,
     query_create_students_table,
     query_create_attendance_table,
+    query_create_attendance_log_change_table,
     tables_library
 }

@@ -27,6 +27,26 @@ function select_attendance_data(table_name) {
     FROM ${table_name}`
 }
 
+function select_attendance_change_log_data(table_name) {
+  return `
+    SELECT 
+      attendance_id,
+      school_id,
+      class_id,
+      teacher_id,
+      student_id,
+
+      DATE_FORMAT(attendance_date, '%Y-%m-%d') AS attendance_date,
+
+      is_present,
+      notes,
+      DATE_FORMAT(CONVERT_TZ(created_at, '+00:00', '+00:00'), '%Y-%m-%d %H:%i:%s UTC') as created_at,
+      DATE_FORMAT(CONVERT_TZ(updated_at, '+00:00', '+00:00'), '%Y-%m-%d %H:%i:%s UTC') as updated_at,
+      modified_by_email,
+      modified_by_full_name
+    FROM ${table_name}`
+}
+
 // const pacingQuery = `
 //     SELECT
 //         DATE_FORMAT(CONVERT_TZ(max_booking_datetime, '+00:00', '+00:00'), '%Y-%m-%d %H:%i:%s Asia/Dubai') as max_booking_datetime,
@@ -89,11 +109,19 @@ const tables_library = [
       step: "STEP #2.5:",
       step_info: "attendance",
     },
+    { table_name: "attendance_change_log",
+      pool_name: local_mock_attendance_db_config,
+    //   query: attendanace_change_log,
+      file_name: 'attendance_change_log_data',
+      step: "STEP #2.5:",
+      step_info: "attendance change log",
+    },
 ]
 
 module.exports = {
     select_query,
     select_attendance_data,
+    select_attendance_change_log_data,
     tables_library,
 }
 

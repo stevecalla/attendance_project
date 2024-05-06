@@ -25,6 +25,9 @@ const seed_data = [
   {table_name: "students", first_name: "Rawley", last_name: "Orteaux", school_id: "1", class_id: "2"}, 
   {table_name: "students", first_name: "Sylas", last_name: "Castellini", school_id: "1", class_id: "2"},
 
+  // Attendance Change Log
+  { table_name: "attendance_change_log", school_id: 1, class_id: 1, teacher_id: 1, student_id: 1, attendance_date: '2024-04-15', is_present: true, notes: "", modified_by_email: "seed data", modified_by_full_name: "seed data"},
+  
   // Attendance
   { table_name: "attendance", school_id: 1, class_id: 1, teacher_id: 1, student_id: 1, attendance_date: '2024-04-15', is_present: true, notes: ""},
   { table_name: "attendance", school_id: 1, class_id: 1, teacher_id: 1, student_id: 2, attendance_date: '2024-04-15', is_present: true, notes: ""},
