@@ -60,6 +60,7 @@ In addition, this Github repo creates the backend datebase as noted below:
 8. Conduct client research to align features and design with practical use and needs.
 9. Integrate appropriate alerts and notifications to confirm attendance status updates.
 10. Add/leverage Retool functionality for testing, modules, versioning, analytics tracking, login/out and more.
+11. Add validation for notes input, spinners as UX appropriate, reset button for filters on the My Students table, and complete the attendance update log to ensure a record is inserted into this log table each time a change is made and the updated_at date is updated via BigQuery not the insert query.
 
 ## Technology
 
@@ -67,20 +68,31 @@ In addition, this Github repo creates the backend datebase as noted below:
 2. `Git/Github:` Repo and version management specifically for the backend database code.
 3. `MySQL`: Local database in MySQL Workbench.
 4. `Nodejs & Javascript`: For building/seeding the local MySQL DB and deploying to Google Cloud/Bigquery.
-10. `NPM Packages`: `moment` in Retool, `dayjs`, `mysql2`, `dotenv`, `google-cloud/bigquery`, `google-cloud/storage`.
+10. `NPM Packages`: `moment` in Retool, `dayjs`, `mysql2`, `plotly`, `dotenv`, `google-cloud/bigquery`, `google-cloud/storage`.
 
 ## Website Preview
 
 ### Static Screenshots
 
-[Link to WalkThrough Video](https://drive.google.com/file/d/1w3eswEcDTp-oEddsNW0qHvPi9W9iFht3/view)
+* My Student - Desktop View
+<img src="./src/assets/desktop_my_key_stats.png" width="700" height="400">
+<img src="./src/assets/desktop_my_students.png" width="700" height="400">
+<img src="./src/assets/desktop_my_data.png" width="700" height="400">
+<img src="./src/assets/mobile_my_key_stats.png" width="700" height="400">
+<img src="./src/assets/mobile_my_students.png" width="700" height="400">
 
-* Key Metrics Screenshot
-<img src="./src/assets/key_metrics_computer_frame.png" width="700" height="400">
-<img src="./src/assets/mobile.gif" width="700" height="400">
-* Dashbaord Screenshot
-* Deep Dive Screenshot
-* My Class Screenshot
+* My Key Stats - Mobile View
+
+### Video & Gif Walkthrough
+
+* Desktop Walkthrough Video (with sound, 8 minutes long) [Link to WalkThrough Video](https://youtu.be/pLojbkOPM50)
+* Mobile Walkthrough Video (no sound, 1 minutes long) [Link to WalkThrough Video](https://youtu.be/6Mep5hBHs6g)
+
+* Desktop - Gif Demo
+<img src="./src/assets/desktop_walkthrough.gif" width="700" height="400">
+
+* Mobile - Gif Demo
+<img src="./src/assets/mobile_walkthrough.gif" width="700" height="400">
 
 ## Installation
 

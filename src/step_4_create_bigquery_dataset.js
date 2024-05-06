@@ -7,7 +7,7 @@ const { execute_google_cloud_command } = require('../utilities/google_cloud_exec
 
 const GOOGLE_SERVICE_ACCOUNT = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT);
 const datasetId = "attendance_db";
-const tableIds = ["attendance_data",  "classes_data", "schools_data", "students_data",  "teachers_data"];
+const tableIds = ["attendance_change_log", "attendance_data", "classes_data", "schools_data", "students_data",  "teachers_data"];
 
 async function execute_create_bigquery_dataset() {
     try {

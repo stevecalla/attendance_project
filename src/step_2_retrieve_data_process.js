@@ -12,6 +12,7 @@ const { generateLogFile } = require('../utilities/generateLogFile');
 const { 
     select_query,
     select_attendance_data,
+    select_attendance_change_log_data,
     tables_library,
 } = require('../queries/query_all_tables_for_biquery');
 
@@ -139,7 +140,7 @@ async function execute_retrieve_data() {
         // STEP 1.0 ARCHIVE FILES
         console.log(`\nSTEP 1.0: ARCHIVE FILES`);
         console.log(`${getCurrentDateTime()}\n`);
-        moveFilesToArchive();
+        await moveFilesToArchive();
 
         // STEP 2.0 PULL SQL DATA FROM BOOKING, KEY METRICS & PACING METRICS TABLES
         console.log(`\nSTEP 2.0: PULL SQL DATA FROM EACH TABLE`);
@@ -152,7 +153,11 @@ async function execute_retrieve_data() {
             const pool = await create_local_db_connection(pool_name);
             // console.log(pool);
 
-            const query = table_name === "attendance" ? select_attendance_data(table_name) : select_query(table_name);
+            const query = table_name === "attendance"
+            ? select_attendance_data(table_name)
+            : (table_name === "attendance_change_log"
+              ? select_attendance_change_log_data(table_name)
+              : select_query(table_name));
             // console.log(query);
             
             const info = `${step} GET ${step_info.toUpperCase()} DATA`;

@@ -12,10 +12,12 @@ const { execute_google_cloud_command } = require('../utilities/google_cloud_exec
 const GOOGLE_SERVICE_ACCOUNT = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT);
 const { csv_export_path } = require('../utilities/config');
 const { attendance_schema } = require('../utilities/attendance_schema');
+const { attendance_change_log_schema } = require('../utilities/attendance_change_log_schema');
 
 const datasetId = "attendance_db";
 //TODO: Based on testing the order is important; below is in alpha order
-const tableIds = ["attendance_data",  "classes_data", "schools_data", "students_data",  "teachers_data"];
+const tableIds = ["attendance_change_log", "attendance_data", "classes_data", "schools_data", "students_data",  "teachers_data"];
+// const tableIds = ["attendance_data", "classes_data"]; // for testing
 
 // Import a GCS file into a table with manually defined schema.
 async function execute_load_big_query_database() {
@@ -49,8 +51,8 @@ async function execute_load_big_query_database() {
             tablePath: files[index],
         }
     });
-    // console.log(files);
-    // console.log(merged_table_details);
+    console.log(files);
+    console.log(merged_table_details);
 
     const filesLength = merged_table_details.length;
 
@@ -61,22 +63,33 @@ async function execute_load_big_query_database() {
         // Configure the load job. For full list of options, see:
         // https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad
         // source: https://cloud.google.com/bigquery/docs/samples/bigquery-load-table-gcs-csv-truncate
-        const metadata = file.tableName === "attendance_data" ? {
-            sourceFormat: 'CSV',
-            skipLeadingRows: 1,
-            schema: { fields: attendance_schema },
-            location: 'US',
-            // Set the write disposition to overwrite existing table data.
-            writeDisposition: 'WRITE_TRUNCATE',
-        } : {
+        const metadataOptions = {
+            'attendance_data': {
+                sourceFormat: 'CSV',
+                skipLeadingRows: 1,
+                schema: { fields: attendance_schema },
+                location: 'US',
+                // Set the write disposition to overwrite existing table data.
+                writeDisposition: 'WRITE_TRUNCATE',
+            },
+            'attendance_change_log': {
+                sourceFormat: 'CSV',
+                skipLeadingRows: 1,
+                schema: { fields: attendance_change_log_schema },
+                location: 'US',
+                writeDisposition: 'WRITE_TRUNCATE',
+            },
+            // Add more options for other file.tableName values if needed
+        };
+        
+        const metadata = metadataOptions[file.tableName] || {
             sourceFormat: 'CSV',
             skipLeadingRows: 1,
             autodetect: true,
             location: 'US',
-            // Set the write disposition to overwrite existing table data.
             writeDisposition: 'WRITE_TRUNCATE',
         };
-    
+        
         // Load data from a Google Cloud Storage file into the table
         const [job] = await bigqueryClient
             .dataset(datasetId)
