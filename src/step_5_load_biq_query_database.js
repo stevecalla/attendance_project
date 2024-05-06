@@ -16,6 +16,7 @@ const { attendance_schema } = require('../utilities/attendance_schema');
 const datasetId = "attendance_db";
 //TODO: Based on testing the order is important; below is in alpha order
 const tableIds = ["attendance_data",  "classes_data", "schools_data", "students_data",  "teachers_data"];
+// const tableIds = ["attendance_data", "classes_data"]; // for testing
 
 // Import a GCS file into a table with manually defined schema.
 async function execute_load_big_query_database() {

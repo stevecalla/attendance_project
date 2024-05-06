@@ -55,6 +55,20 @@ const attendance_schema = [
         "description": null,
         "fields": []
     },
+    {
+        "name": "created_at",
+        "mode": "NULLABLE",
+        "type": "TIMESTAMP",
+        "description": null,
+        "fields": []
+    },
+    {
+        "name": "updated_at",
+        "mode": "NULLABLE",
+        "type": "TIMESTAMP",
+        "description": null,
+        "fields": []
+    },
 ];
 
 // console.log(booking_schema.length);

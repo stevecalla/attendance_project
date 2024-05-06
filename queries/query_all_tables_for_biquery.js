@@ -18,40 +18,40 @@ function select_attendance_data(table_name) {
       teacher_id,
       student_id,
 
-      -- attendance_date,
       DATE_FORMAT(attendance_date, '%Y-%m-%d') AS attendance_date,
 
       is_present,
-      -- status
-      notes
+      notes,
+      DATE_FORMAT(CONVERT_TZ(created_at, '+00:00', '+00:00'), '%Y-%m-%d %H:%i:%s UTC') as created_at,
+      DATE_FORMAT(CONVERT_TZ(updated_at, '+00:00', '+00:00'), '%Y-%m-%d %H:%i:%s UTC') as updated_at
     FROM ${table_name}`
 }
 
-const pacingQuery = `
-    SELECT
-        DATE_FORMAT(CONVERT_TZ(max_booking_datetime, '+00:00', '+00:00'), '%Y-%m-%d %H:%i:%s Asia/Dubai') as max_booking_datetime,
-        is_before_today,
+// const pacingQuery = `
+//     SELECT
+//         DATE_FORMAT(CONVERT_TZ(max_booking_datetime, '+00:00', '+00:00'), '%Y-%m-%d %H:%i:%s Asia/Dubai') as max_booking_datetime,
+//         is_before_today,
 
-        pickup_month_year,
-        DATE_FORMAT(booking_date, '%Y-%m-%d') AS booking_date,
+//         pickup_month_year,
+//         DATE_FORMAT(booking_date, '%Y-%m-%d') AS booking_date,
 
-        days_from_first_day_of_month,
-        count,
-        total_booking_charge_aed,
-        total_booking_charge_less_discount_aed,
-        total_booking_charge_less_discount_extension_aed,
-        total_extension_charge_aed,
-        running_count,running_total_booking_charge_aed,
-        running_total_booking_charge_less_discount_aed,
-        running_total_booking_charge_less_discount_extension_aed,
-        running_total_extension_charge_aed,
+//         days_from_first_day_of_month,
+//         count,
+//         total_booking_charge_aed,
+//         total_booking_charge_less_discount_aed,
+//         total_booking_charge_less_discount_extension_aed,
+//         total_extension_charge_aed,
+//         running_count,running_total_booking_charge_aed,
+//         running_total_booking_charge_less_discount_aed,
+//         running_total_booking_charge_less_discount_extension_aed,
+//         running_total_extension_charge_aed,
 
-        DATE_FORMAT(CONVERT_TZ(created_at, '+00:00', '+00:00'), '%Y-%m-%d %H:%i:%s MST') as created_at
+//         DATE_FORMAT(CONVERT_TZ(created_at, '+00:00', '+00:00'), '%Y-%m-%d %H:%i:%s MST') as created_at
 
-    FROM ezhire_pacing_metrics.pacing_final_data
-    ORDER BY pickup_month_year ASC, booking_date ASC
-    -- LIMIT 1;
-`;
+//     FROM ezhire_pacing_metrics.pacing_final_data
+//     ORDER BY pickup_month_year ASC, booking_date ASC
+//     -- LIMIT 1;
+// `;
 
 const tables_library = [
     { table_name: "schools",
