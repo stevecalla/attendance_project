@@ -1,0 +1,13 @@
+RETOOL
+- TUTORIAL: https://docs.retool.com/apps/web/tutorial/1
+- API: https://retoolapi.dev/kRyGM2/data
+	-- get curl "https://api-generator.retool.com/kRyGM2/data"
+	-- get filtered curl "https://api-generator.retool.com/kRyGM2/data?school_id=value"
+	-- get id curl "https://api-generator.retool.com/kRyGM2/data/1"
+	-- get paginate curl "https://api-generator.retool.com/kRyGM2/data?_page=2&_limit=10"
+	-- post curl -X POST -H 'Content-Type: application/json' -d '{"key":"value"}' https://api-generator.retool.com/kRyGM2/data
+ 	-- put curl -X PUT -H 'Content-Type: application/json' -d '{"key":"value"}' https://api-generator.retool.com/kRyGM2/data/1
+	-- patch curl -X PATCH -H 'Content-Type: application/json' -d '{"key":"value"}' https://api-generator.retool.com/kRyGM2/data/1
+	-- delete curl -X DELETE https://api-generator.retool.com/kRyGM2/data/1
+
+Student Count = {{ countAllStudents.data.f0_[0]}}
