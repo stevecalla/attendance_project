@@ -6,7 +6,7 @@ const { local_mock_attendance_db_config } = require('../utilities/config');
 const { create_local_db_connection } = require('../utilities/connectionLocalDB');
 
 const { query_create_database } = require('../queries/queries_create_db');
-const { query_drop_database } = require('../queries/queries_drop_db_tables');
+const { query_drop_database, query_drop_table } = require('../queries/queries_drop_db_tables');
 const { tables_library } = require('../queries/queries_create_tables');
 const { query_insert_seed_data } = require('../queries/queries_insert_seed_data');
 const { seed_data } = require('../queries/queries_seed_data');
@@ -157,11 +157,13 @@ async function execute_insert_createdAt_query(pool, db_name, table, step) {
 }
 
 async function main() {
+    let pool; // Declare the pool variable outside the try block to close connection in finally block
+    const startTime = performance.now();
+
     try {
-        const startTime = performance.now();
 
         // STEP #0: CREATE CONNECTION
-        const pool = await create_connection();
+        pool = await create_connection();
 
         const db_name = `mock_attendance_db`;
 
@@ -173,7 +175,7 @@ async function main() {
         for (const table of tables_library) {
             const {table_name, create_query, step, step_info} = table;
 
-            const drop_query = query_drop_database(table_name.toUpperCase());
+            const drop_query = query_drop_table(table_name.toUpperCase());
 
             const drop_info = `${step} DROP ${step_info.toUpperCase()} TABLE`;
             const create_info = `${step} CREATE ${step_info.toUpperCase()} TABLE`;
@@ -204,7 +206,21 @@ async function main() {
             await execute_insert_createdAt_query(pool, db_name, table_name, `STEP #5: INSERT CREATED/UPDATED AT DATE IN ${table_name.toUpperCase()} TABLE`);
         }
 
-        // STEP #5: CLOSE CONNECTION/POOL
+        // STEP #5a: Log results
+        console.log('STEP #5A: All queries executed successfully.');
+
+    } catch (error) {
+        console.log('STEP #5B: All queries NOT executed successfully.');
+        console.error('Error:', error);
+
+    } finally {
+        // STEP #5c: Log results
+        const endTime = performance.now();
+        const elapsedTime = ((endTime - startTime) / 1_000).toFixed(2); //convert ms to sec
+        console.log(`\nSTEP #5C = TIME LOG. Elapsed Time: ${elapsedTime ? elapsedTime : "Opps error getting time"} sec\n`);
+        // return elapsedTime;
+
+        // STEP #6: CLOSE CONNECTION/POOL
         await pool.end(err => {
             if (err) {
                 console.error('Error closing connection pool:', err.message);
@@ -212,16 +228,6 @@ async function main() {
                 console.log('Connection pool closed successfully.');
             }
         });
-        // STEP #5: Log results
-        console.log('All queries executed successfully.');
-
-        const endTime = performance.now();
-        const elapsedTime = ((endTime - startTime) / 1_000).toFixed(2); //convert ms to sec
-        console.log(`\nAll create db & tables executed successfully. Elapsed Time: ${elapsedTime ? elapsedTime : "Opps error getting time"} sec\n`);
-        return elapsedTime;
-
-    } catch (error) {
-        console.error('Error:', error);
     }
 }
 
